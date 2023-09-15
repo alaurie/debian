@@ -99,6 +99,7 @@ if [[ $chassis == "Laptop" ]]; then
     # Install thermald and power-profiles-daemon
     nala install thermald power-profiles-daemon -y
     systemctl enable thermald
+    systemctl enable power-profiles-daemon
 fi
 
 echo "Done! Rebooting in 10 seconds..."

@@ -33,6 +33,17 @@ nala upgrade -y
 # Install utils
 nala install dirmngr ca-certificates software-properties-common apt-transport-https curl build-essential -y
 
+# Determine if laptop
+chassis=$(dmidecode -s chassis-type)
+
+if [[ $chassis == 'Notebook' ]]; then
+    echo "Laptop detected! Installing thermald and power-profiles-daemon"
+    # Install thermald and power-profiles-daemon
+    nala install thermald power-profiles-daemon -y
+    systemctl enable thermald
+    systemctl enable power-profiles-daemon
+fi
+
 # vscode repo
 echo "Installing VSCode"
 curl -fSsL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /usr/share/keyrings/vscode.gpg >/dev/null
@@ -102,16 +113,8 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 nala purge pulseaudio -y
 nala install pipewire-audio -y
 
-# Determine if laptop
-chassis=$(dmidecode -s chassis-type)
-
-if [[ $chassis == 'Notebook' ]]; then
-    echo "Laptop detected! Installing thermald and power-profiles-daemon"
-    # Install thermald and power-profiles-daemon
-    nala install thermald power-profiles-daemon -y
-    systemctl enable thermald
-    systemctl enable power-profiles-daemon
-fi
+# Install firewalld and firewall-config
+nala install firewalld firewall-config -y
 
 echo "Done! Rebooting in 10 seconds..."
 sleep 10

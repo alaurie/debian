@@ -8,8 +8,11 @@ fi
 
 echo "Setting up Debian..."
 
+echo "What is the username to configure?"
+read -r name
+
 # Add user to sudo
-usermod -aG sudo alex
+usermod -aG sudo "$name"
 
 # Add contrib and non-free to sources.list
 sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list

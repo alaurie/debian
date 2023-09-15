@@ -1,13 +1,4 @@
 # Debian Setup Script
-# Parameter
-## Laptop
-
-Installs and enables
-
-* thermald
-* power-profiles-daemon
-# Main
-
 Installs and enables
 
 * Adds user to sudo group
@@ -21,5 +12,8 @@ Installs and enables
 * Insync
 * Nvidia Drivers from Nvidia Debian 11 repo
 * Steam
+* Add MesloNG Font
+* Add FiraCode Font
 * Removes Firefox
 * Remove Libreoffice
+* Thermald and power-profiles-daemon (if Laptop chassis detected)

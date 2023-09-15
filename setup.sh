@@ -31,7 +31,7 @@ apt update && apt install nala -y
 nala upgrade -y
 
 # Install utils
-nala install dirmngr ca-certificates software-properties-common apt-transport-https curl -y
+nala install dirmngr ca-certificates software-properties-common apt-transport-https curl build-essential -y
 
 # vscode repo
 echo "Installing VSCode"
@@ -75,13 +75,16 @@ nala purge libreoffice* firefox* -y
 nala autoremove -y
 
 # Pyenv
-nala install build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev -y
+nala install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev -y
 
 export PYENV_ROOT="/home/$name/.pyenv"
 curl https://pyenv.run | bash
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >>$HOME/.bashrc
 echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >>$HOME/.bashrc
 echo 'eval "$(pyenv init -)"' >>$HOME/.bashrc
+
+# Correct permissions on pyenv directory
+chown -R $name:$name $HOME/.pyenv
 
 # Install fonts
 nala install fonts-firacode -y
@@ -91,10 +94,18 @@ echo "Installing Meslo Nerd Font"
 mkdir -p "$HOME/.local/share/fonts"
 curl -fSsL 'https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf' -o "$HOME/.local/share/fonts/MesloLGS NF Regular.ttf"
 
+# Install Flatpak
+nala install flatpak plasma-discover-flatpak-backend -y
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# Install pipewire
+nala purge pulseaudio -y
+nala install pipewire-audio -y
+
 # Determine if laptop
 chassis=$(dmidecode -s chassis-type)
 
-if [[ $chassis == "Laptop" ]]; then
+if [[ $chassis == 'Notebook' ]]; then
     echo "Laptop detected! Installing thermald and power-profiles-daemon"
     # Install thermald and power-profiles-daemon
     nala install thermald power-profiles-daemon -y

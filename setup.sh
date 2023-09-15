@@ -79,9 +79,9 @@ nala install build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev li
 
 export PYENV_ROOT="/home/$name/.pyenv"
 curl https://pyenv.run | bash
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $HOME/.bashrc
-echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> $HOME/.bashrc
-echo 'eval "$(pyenv init -)"' >> $HOME/.bashrc
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >>$HOME/.bashrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >>$HOME/.bashrc
+echo 'eval "$(pyenv init -)"' >>$HOME/.bashrc
 
 # Install fonts
 nala install fonts-firacode -y

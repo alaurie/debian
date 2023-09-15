@@ -19,4 +19,6 @@ Installs and enables
 * Remove Libreoffice
 * Removes PulseAudio
 * PipeWire
+* Firewalld
+* Firewall-Config
 * Thermald and power-profiles-daemon (if Laptop chassis detected)

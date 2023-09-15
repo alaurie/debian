@@ -10,6 +10,7 @@ Installs and enables
 
 Installs and enables
 
+* Adds user to sudo group
 * contrib and non-free
 * bookworm-backports
 * i386 Architecture

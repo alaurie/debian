@@ -13,7 +13,7 @@ read -r name
 HOME="/home/$name"
 
 # Add user to sudo
-usermod -aG sudo "$name"
+usermod -aG sudo $name
 
 # Add contrib and non-free to sources.list
 sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list

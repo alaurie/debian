@@ -12,8 +12,11 @@ Installs and enables
 * Insync
 * Nvidia Drivers from Nvidia Debian 11 repo
 * Steam
+* PyEnv
 * Add MesloNG Font
 * Add FiraCode Font
 * Removes Firefox
 * Remove Libreoffice
+* Removes PulseAudio
+* PipeWire
 * Thermald and power-profiles-daemon (if Laptop chassis detected)

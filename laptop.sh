@@ -25,6 +25,9 @@ apt update && apt install nala -y
 # Upgrade
 nala upgrade -y
 
+# Install pipewire and wireplumber
+nala install pipewire-audio
+
 # Install utils
 nala install dirmngr ca-certificates software-properties-common apt-transport-https curl -y
 
@@ -32,22 +35,22 @@ nala install dirmngr ca-certificates software-properties-common apt-transport-ht
 nala install thermald power-profiles-daemon -y
 systemctl enable thermald
 
-# Install vscode
+# Install vscode repo
 echo "Installing VSCode"
 curl -fSsL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /usr/share/keyrings/vscode.gpg >/dev/null
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/vscode.gpg] https://packages.microsoft.com/repos/vscode stable main' | tee /etc/apt/sources.list.d/vscode.list
-nala update && nala install code -y
 
-# Install Microsoft Edge Stable
+# Install Microsoft Edge Stable repo
 echo "Installing Microsoft Edge Stable"
 curl -fSsL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /usr/share/keyrings/microsoft-edge.gpg >/dev/null
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-edge.gpg] https://packages.microsoft.com/repos/edge stable main" | tee /etc/apt/sources.list.d/microsoft-edge.list
-nala update && nala install microsoft-edge-stable -y
 
-# Install Google Chrome
+# Install Google Chrome repo
 curl -fSsl https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | tee /usr/share/keyrings/google.gpg >/dev/null
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google.gpg] https://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list
-nala update && nala install google-chrome-stable -y
+
+nala update
+nala install google-chrome-stable microsoft-edge-stable code -y
 
 # Install NVIDIA drivers
 curl -fSsL https://developer.download.nvidia.com/compute/cuda/repos/debian11/x86_64/3bf863cc.pub | gpg --dearmor | tee /usr/share/keyrings/nvidia-drivers.gpg >/dev/null

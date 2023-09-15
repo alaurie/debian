@@ -13,7 +13,7 @@ read -r name
 HOME="/home/$name"
 
 # Add user to sudo
-usermod -aG sudo $name
+usermod -aG sudo "$name"
 
 # Add contrib and non-free to sources.list
 sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list
@@ -79,12 +79,12 @@ nala install libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev cur
 
 export PYENV_ROOT="/home/$name/.pyenv"
 curl https://pyenv.run | bash
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >>$HOME/.bashrc
-echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >>$HOME/.bashrc
-echo 'eval "$(pyenv init -)"' >>$HOME/.bashrc
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >>"$HOME"/.bashrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >>"$HOME"/.bashrc
+echo 'eval "$(pyenv init -)"' >>"$HOME"/.bashrc
 
 # Correct permissions on pyenv directory
-chown -R $name:$name $HOME/.pyenv
+chown -R "$name":"$name" "$HOME"/.pyenv
 
 # Install fonts
 nala install fonts-firacode -y

@@ -10,6 +10,7 @@ echo "Setting up Debian..."
 
 echo "What is the username to configure?"
 read -r name
+HOME="/home/$name"
 
 # Add user to sudo
 usermod -aG sudo "$name"
@@ -31,12 +32,6 @@ nala upgrade -y
 
 # Install utils
 nala install dirmngr ca-certificates software-properties-common apt-transport-https curl -y
-
-if [[ $1 == "laptop" ]]; then
-    # Install thermald and power-profiles-daemon
-    nala install thermald power-profiles-daemon -y
-    systemctl enable thermald
-fi
 
 # vscode repo
 echo "Installing VSCode"
@@ -78,6 +73,32 @@ nala install steam-installer -y
 # Removing Firefox and libreoffice
 nala purge libreoffice* firefox* -y
 nala autoremove -y
+
+# Pyenv
+nala install build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl git -y
+export PYENV_ROOT="/home/$name/.pyenv"
+curl https://pyenv.run | bash
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >>~/.bashrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >>~/.bashrc
+echo 'eval "$(pyenv init -)"' >>~/.bashrc
+
+# Install fonts
+nala install fonts-firacode fonts-roboto fonts-roboto-mono fonts-noto-color-emoji -y
+
+# Install Meslo Nerd Font
+echo "Installing Meslo Nerd Font"
+mkdir -p "$HOME/.local/share/fonts"
+curl -fSsL 'https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf' -o "$HOME/.local/share/fonts/MesloLGS NF Regular.ttf"
+
+# Determine if laptop
+chassis=$(dmidecode -s chassis-type)
+
+if [[ $chassis == "Laptop" ]]; then
+    echo "Laptop detected! Installing thermald and power-profiles-daemon"
+    # Install thermald and power-profiles-daemon
+    nala install thermald power-profiles-daemon -y
+    systemctl enable thermald
+fi
 
 echo "Done! Rebooting in 10 seconds..."
 sleep 10

@@ -53,7 +53,7 @@ nala update && nala install google-chrome-stable -y
 curl -fSsL https://developer.download.nvidia.com/compute/cuda/repos/debian11/x86_64/3bf863cc.pub | gpg --dearmor | tee /usr/share/keyrings/nvidia-drivers.gpg >/dev/null
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/nvidia-drivers.gpg] https://developer.download.nvidia.com/compute/cuda/repos/debian11/x86_64 /" | tee /etc/apt/sources.list.d/nvidia-drivers.list
 nala update && nala install nvidia-driver -y
-nala install install nvidia-driver-libs:i386 -y
+nala install nvidia-driver-libs:i386 -y
 
 # Install Insync
 echo "Installing Insync"

@@ -7,6 +7,8 @@ if [ "$USER" != "root" ]; then
 fi
 
 echo "Setting up Debian laptop..."
+# Add user to sudo
+usermod -aG sudo alex
 
 # Add contrib and non-free to sources.list
 sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list

@@ -29,9 +29,6 @@ apt update && apt install nala -y
 # Upgrade
 nala upgrade -y
 
-# Install pipewire and wireplumber
-nala install pipewire-audio
-
 # Install utils
 nala install dirmngr ca-certificates software-properties-common apt-transport-https curl -y
 

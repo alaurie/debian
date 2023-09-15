@@ -6,7 +6,8 @@ if [ "$USER" != "root" ]; then
     exit 2
 fi
 
-echo "Setting up Debian laptop..."
+echo "Setting up Debian..."
+
 # Add user to sudo
 usermod -aG sudo alex
 
@@ -31,28 +32,33 @@ nala install pipewire-audio
 # Install utils
 nala install dirmngr ca-certificates software-properties-common apt-transport-https curl -y
 
-# Install thermald and power-profiles-daemon
-nala install thermald power-profiles-daemon -y
-systemctl enable thermald
+if [[ $1 == "laptop" ]]; then
+    # Install thermald and power-profiles-daemon
+    nala install thermald power-profiles-daemon -y
+    systemctl enable thermald
+fi
 
-# Install vscode repo
+# vscode repo
 echo "Installing VSCode"
 curl -fSsL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /usr/share/keyrings/vscode.gpg >/dev/null
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/vscode.gpg] https://packages.microsoft.com/repos/vscode stable main' | tee /etc/apt/sources.list.d/vscode.list
 
-# Install Microsoft Edge Stable repo
+# Microsoft Edge Stable repo
 echo "Installing Microsoft Edge Stable"
 curl -fSsL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /usr/share/keyrings/microsoft-edge.gpg >/dev/null
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft-edge.gpg] https://packages.microsoft.com/repos/edge stable main" | tee /etc/apt/sources.list.d/microsoft-edge.list
 
-# Install Google Chrome repo
+# Google Chrome repo
+echo "Installing Google Chrome"
 curl -fSsl https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | tee /usr/share/keyrings/google.gpg >/dev/null
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google.gpg] https://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list
 
+# Install packages
 nala update
 nala install google-chrome-stable microsoft-edge-stable code -y
 
 # Install NVIDIA drivers
+echo "Installing NVIDIA drivers"
 curl -fSsL https://developer.download.nvidia.com/compute/cuda/repos/debian11/x86_64/3bf863cc.pub | gpg --dearmor | tee /usr/share/keyrings/nvidia-drivers.gpg >/dev/null
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/nvidia-drivers.gpg] https://developer.download.nvidia.com/compute/cuda/repos/debian11/x86_64 /" | tee /etc/apt/sources.list.d/nvidia-drivers.list
 nala update && nala install nvidia-driver -y

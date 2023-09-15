@@ -75,7 +75,7 @@ nala purge libreoffice* firefox* -y
 nala autoremove -y
 
 # Pyenv
-nala install install build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev -y
+nala install build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev curl libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev -y
 
 export PYENV_ROOT="/home/$name/.pyenv"
 curl https://pyenv.run | bash
@@ -84,7 +84,7 @@ echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >>~/.b
 echo 'eval "$(pyenv init -)"' >>~/.bashrc
 
 # Install fonts
-nala install fonts-firacode fonts-roboto fonts-roboto-mono fonts-noto-color-emoji -y
+nala install fonts-firacode -y
 
 # Install Meslo Nerd Font
 echo "Installing Meslo Nerd Font"

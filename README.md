@@ -21,4 +21,4 @@ Installs and enables
 * PipeWire
 * Firewalld
 * Firewall-Config
-* Thermald and power-profiles-daemon (if Laptop chassis detected)
+* Thermald and power-profiles-daemon (if Notebook chassis detected)

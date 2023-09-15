@@ -1,6 +1,6 @@
 # Debian Setup Script
 # Parameter
-## laptop
+## Laptop
 
 Installs and enables
 
@@ -10,7 +10,8 @@ Installs and enables
 
 Installs and enables
 
-* Bookworm-Backports
+* contrib and non-free
+* bookworm-backports
 * i386 Architecture
 * Nala
 * Google Chrome Stable

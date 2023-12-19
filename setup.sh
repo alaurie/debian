@@ -37,10 +37,16 @@ nala install dirmngr ca-certificates software-properties-common apt-transport-ht
 chassis=$(dmidecode -s chassis-type)
 
 if [[ $chassis == 'Notebook' ]]; then
-    echo "Laptop detected! Installing thermald"
+    echo "Laptop detected! Installing thermald and auto-cpufreq"
     # Install thermald
     nala install thermald -y
     systemctl enable thermald
+
+    # Install auto-cpufreq
+    mkdir -p /home/"$name"/Git
+    git clone https://github.com/AdnanHodzic/auto-cpufreq.git /home/"$name"/Git/
+    sh /home/"$name"/Git/auto-cpufreq/auto-cpufreq-installer --install
+    auto-cpufreq --install
 fi
 
 # vscode repo
@@ -109,7 +115,6 @@ nala install flatpak plasma-discover-backend-flatpak -y
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # Install pipewire
-nala purge pulseaudio -y
 nala install pipewire-audio -y
 
 # Install firewalld and firewall-config

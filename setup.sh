@@ -37,11 +37,10 @@ nala install dirmngr ca-certificates software-properties-common apt-transport-ht
 chassis=$(dmidecode -s chassis-type)
 
 if [[ $chassis == 'Notebook' ]]; then
-    echo "Laptop detected! Installing thermald and power-profiles-daemon"
-    # Install thermald and power-profiles-daemon
-    nala install thermald power-profiles-daemon -y
+    echo "Laptop detected! Installing thermald"
+    # Install thermald
+    nala install thermald -y
     systemctl enable thermald
-    systemctl enable power-profiles-daemon
 fi
 
 # vscode repo
@@ -65,8 +64,8 @@ nala install google-chrome-stable microsoft-edge-stable code -y
 
 # Install NVIDIA drivers
 echo "Installing NVIDIA drivers"
-curl -fSsL https://developer.download.nvidia.com/compute/cuda/repos/debian11/x86_64/3bf863cc.pub | gpg --dearmor | tee /usr/share/keyrings/nvidia-drivers.gpg >/dev/null
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/nvidia-drivers.gpg] https://developer.download.nvidia.com/compute/cuda/repos/debian11/x86_64 /" | tee /etc/apt/sources.list.d/nvidia-drivers.list
+curl -fSsL https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/3bf863cc.pub | gpg --dearmor | tee /usr/share/keyrings/nvidia-drivers.gpg >/dev/null
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/nvidia-drivers.gpg] https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64 /" | tee /etc/apt/sources.list.d/nvidia-drivers.list
 nala update && nala install nvidia-driver -y
 nala install nvidia-driver-libs:i386 -y
 
@@ -106,7 +105,7 @@ mkdir -p "$HOME/.local/share/fonts"
 curl -fSsL 'https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf' -o "$HOME/.local/share/fonts/MesloLGS NF Regular.ttf"
 
 # Install Flatpak
-nala install flatpak plasma-discover-flatpak-backend -y
+nala install flatpak plasma-discover-backend-flatpak -y
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # Install pipewire

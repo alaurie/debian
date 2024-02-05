@@ -43,10 +43,11 @@ if [[ $chassis == 'Notebook' ]]; then
     systemctl enable thermald
 
     # Install auto-cpufreq
-    mkdir -p /home/$name/Git
-    git clone https://github.com/AdnanHodzic/auto-cpufreq.git /home/$name/Git/
+    mkdir -p /home/$name/Git/auto-cpufreq
+    git clone https://github.com/AdnanHodzic/auto-cpufreq.git /home/$name/Git/auto-cpufreq
     sh /home/$name/Git/auto-cpufreq/auto-cpufreq-installer --install
     auto-cpufreq --install
+    chown -R "$name":"$name" "$HOME"/Git/auto-cpufreq
 fi
 
 # vscode repo

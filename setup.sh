@@ -43,9 +43,9 @@ if [[ $chassis == 'Notebook' ]]; then
     systemctl enable thermald
 
     # Install auto-cpufreq
-    mkdir -p /home/"$name"/Git
-    git clone https://github.com/AdnanHodzic/auto-cpufreq.git /home/"$name"/Git/
-    sh /home/"$name"/Git/auto-cpufreq/auto-cpufreq-installer --install
+    mkdir -p /home/$name/Git
+    git clone https://github.com/AdnanHodzic/auto-cpufreq.git /home/$name/Git/
+    sh /home/$name/Git/auto-cpufreq/auto-cpufreq-installer --install
     auto-cpufreq --install
 fi
 
